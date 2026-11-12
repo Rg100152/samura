@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAMURA — The Way of the Warrior</title>
+  <meta name="description" content="SAMURA — a cinematic 3D portrait experience. Nine warriors. Seven virtues. One code." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230a0908'/%3E%3Ctext x='50' y='72' font-size='64' text-anchor='middle' fill='%23b3121a' font-family='serif'%3E%E4%BE%8D%3C/text%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700;800&family=Cormorant+Garamond:ital,wght@1,400&family=Manrope:wght@300;400;500&family=Noto+Serif+JP:wght@400;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+  <script>
+    (function () {
+      var root = document.documentElement;
+      root.classList.remove("no-js");
+      root.classList.add("js", "js-anim");
+
+      /*
+       * Safety net: if the module script is blocked (for example when the
+       * file is opened directly with file://) the page still becomes usable.
+       */
+      window.addEventListener("DOMContentLoaded", function () {
+        setTimeout(function () {
+          if (document.body.classList.contains("loaded")) return;
+          document.body.classList.remove("loading");
+          document.body.classList.add("loaded");
+          root.classList.remove("js-anim");
+          var p = document.getElementById("preloader");
+          if (p) p.classList.add("is-done");
+          if (location.protocol === "file:") {
+            var hint = document.createElement("div");
+            hint.className = "run-hint";
+            hint.innerHTML =
+              'For the full 3D experience, run <code>./start.sh</code> or <code>python3 -m http.server 8000</code>.';
+            document.body.appendChild(hint);
+          }
+        }, 1900);
+      });
+    })();
+  </script>
+</head>
+<body class="loading">
+
+  <noscript>
+    <style>
+      .preloader { display: none !important; }
+      body.loading { overflow: auto !important; }
+      .nav__burger { display: none !important; }
+      [data-reveal] { opacity: 1 !important; transform: none !important; }
+    </style>
+  </noscript>
+
+  <div class="grain" aria-hidden="true"></div>
+
+  <div class="cursor" id="cursor" aria-hidden="true">
+    <div class="cursor__dot"></div>
+    <div class="cursor__ring"></div>
+  </div>
+
+  <div class="preloader" id="preloader" aria-hidden="true">
+    <div class="preloader__kanji">侍</div>
+    <div class="preloader__mark">SAMURA</div>
+    <div class="preloader__bar"><span class="preloader__fill" id="loadFill"></span></div>
+    <div class="preloader__meta">
+      <span>Forging the blade</span>
+      <span id="loadNum">00</span>
+    </div>
+  </div>
+
+  <header class="nav" id="nav">
+    <a class="nav__logo" href="#home" data-cursor="hover">
+      <span class="nav__logo-main">SAMURA</span>
+      <span class="nav__logo-kanji">侍</span>
+    </a>
+    <nav class="nav__links" id="navLinks" aria-label="Primary">
+      <a href="#home" data-cursor="hover"><span>01</span>Home</a>
+      <a href="#code" data-cursor="hover"><span>02</span>The Code</a>
+      <a href="#gallery" data-cursor="hover"><span>03</span>Collection</a>
+      <a href="#contact" data-cursor="hover"><span>04</span>Contact</a>
+    </nav>
+    <a class="nav__cta" href="#gallery" data-cursor="hover">Enter</a>
+    <button class="nav__burger" id="burger" aria-label="Open menu" aria-expanded="false">
+      <span></span><span></span>
+    </button>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <canvas id="hero-canvas" aria-hidden="true"></canvas>
+      <div class="hero__torii" aria-hidden="true">
+        <svg viewBox="0 0 600 400" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M30 62 Q300 22 570 62 L570 100 Q300 66 30 100 Z" />
+          <path d="M100 136 L500 136 L500 168 L100 168 Z" />
+          <rect x="86" y="100" width="26" height="272" />
+          <rect x="488" y="100" width="26" height="272" />
+          <rect x="282" y="62" width="36" height="74" />
+        </svg>
+      </div>
+
+      <div class="hero__inner">
+        <p class="eyebrow hero__eyebrow">侍 <span>·</span> The Way of the Warrior <span>·</span> 武士道</p>
+        <h1 class="hero__title">SAMURA</h1>
+        <p class="hero__sub">Nine portraits. Seven virtues. One unbroken code. An interactive gallery forged in shadow, steel and ember.</p>
+        <div class="hero__actions">
+          <a class="btn btn--solid" href="#gallery" data-cursor="hover"><span>Enter the Collection</span></a>
+          <a class="btn btn--ghost" href="#code" data-cursor="hover"><span>The Code 七</span></a>
+        </div>
+      </div>
+
+      <div class="hero__side hero__side--left" aria-hidden="true">武士道 · BUSHIDŌ · 侍</div>
+      <div class="hero__side hero__side--right" aria-hidden="true">九 · SAMURA · 影</div>
+
+      <a class="scroll-cue" href="#code" data-cursor="hover" aria-label="Scroll to explore">
+        <span class="scroll-cue__line"></span>
+        <span class="scroll-cue__text">Scroll</span>
+      </a>
+    </section>
+
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker__track">
+        <span>BUSHIDŌ</span><i>侍</i><span>THE WAY OF THE WARRIOR</span><i>刀</i><span>NINE PORTRAITS</span><i>影</i><span>ONE CODE</span><i>焔</i>
+        <span>BUSHIDŌ</span><i>侍</i><span>THE WAY OF THE WARRIOR</span><i>刀</i><span>NINE PORTRAITS</span><i>影</i><span>ONE CODE</span><i>焔</i>
+      </div>
+    </div>
+
+    <section class="code" id="code">
+      <div class="code__kanji-bg" aria-hidden="true">道</div>
+      <div class="container">
+        <div class="code__head" data-reveal>
+          <div>
+            <p class="eyebrow">武士道 <span>·</span> Bushidō</p>
+            <h2 class="section-title">Seven virtues.<br /><em>One blade.</em></h2>
+          </div>
+          <p class="code__intro">The samurai did not carry honor in the scabbard — it lived in the space between breath and action. These are the seven pillars that held the warrior upright when the world knelt.</p>
+        </div>
+
+        <div class="virtues">
+          <article class="virtue" data-reveal data-delay="0">
+            <span class="virtue__no">01</span>
+            <span class="virtue__kanji">義</span>
+            <h3>Gi <span>Rectitude</span></h3>
+            <p>Decide swiftly and justly. The straight path is not the easy one — it is simply the only one worth walking.</p>
+          </article>
+          <article class="virtue" data-reveal data-delay="60">
+            <span class="virtue__no">02</span>
+            <span class="virtue__kanji">勇</span>
+            <h3>Yū <span>Courage</span></h3>
+            <p>To live when it is right to live. To fall when it is right to fall. Fear is a companion, never a master.</p>
+          </article>
+          <article class="virtue" data-reveal data-delay="120">
+            <span class="virtue__no">03</span>
+            <span class="virtue__kanji">仁</span>
+            <h3>Jin <span>Benevolence</span></h3>
+            <p>Strength without compassion is butchery. The blade is sheathed for the weak as often as it is drawn for the just.</p>
+          </article>
+          <article class="virtue" data-reveal data-delay="180">
+            <span class="virtue__no">04</span>
+            <span class="virtue__kanji">礼</span>
+            <h3>Rei <span>Respect</span></h3>
+            <p>Courtesy is the armor of the soul. The bow is not a submission — it is a declaration of self-possession.</p>
+          </article>
+          <article class="virtue" data-reveal data-delay="0">
+            <span class="virtue__no">05</span>
+            <span class="virtue__kanji">誠</span>
+            <h3>Makoto <span>Sincerity</span></h3>
+            <p>A word once given is a blade drawn. Speak only what you will defend, and defend it without hesitation.</p>
+          </article>
+          <article class="virtue" data-reveal data-delay="60">
+            <span class="virtue__no">06</span>
+            <span class="virtue__kanji">名誉</span>
+            <h3>Meiyo <span>Honor</span></h3>
+            <p>Reputation is a shadow that outlives the man. Guard it as you would guard your own throat.</p>
+          </article>
+          <article class="virtue" data-reveal data-delay="120">
+            <span class="virtue__no">07</span>
+            <span class="virtue__kanji">忠義</span>
+            <h3>Chūgi <span>Loyalty</span></h3>
+            <p>Devotion without condition. The bond to one's lord, one's word and one's path is forged before the world begins.</p>
+          </article>
+          <article class="virtue virtue--mark" data-reveal data-delay="180" aria-hidden="true">
+            <span class="virtue__kanji virtue__kanji--big">侍</span>
+            <span class="virtue__mark-text">SAMURA</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery" id="gallery">
+      <div class="container">
+        <div class="gallery__head" data-reveal>
+          <p class="eyebrow">蒐集 <span>·</span> The Collection</p>
+          <h2 class="section-title">Nine portraits.<br /><em>One spirit.</em></h2>
+          <p class="gallery__intro">Each frame is a silent vow. Click any portrait to step inside the stillness.</p>
+        </div>
+
+        <div class="gallery__grid" id="galleryGrid">
+          <figure class="card" data-src="images/01.jpg" data-title="The Ronin" data-reveal data-delay="0">
+            <div class="card__inner">
+              <img src="images/opt/01.webp" alt="SAMURA portrait 01 — The Ronin" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">01</span>
+                <span class="card__title">The Ronin</span>
+                <span class="card__kanji">侍</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/02.jpg" data-title="Crimson Dusk" data-reveal data-delay="80">
+            <div class="card__inner">
+              <img src="images/opt/02.webp" alt="SAMURA portrait 02 — Crimson Dusk" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">02</span>
+                <span class="card__title">Crimson Dusk</span>
+                <span class="card__kanji">焔</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/03.jpg" data-title="Silent Oath" data-reveal data-delay="160">
+            <div class="card__inner">
+              <img src="images/opt/03.webp" alt="SAMURA portrait 03 — Silent Oath" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">03</span>
+                <span class="card__title">Silent Oath</span>
+                <span class="card__kanji">誓</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/04.jpg" data-title="Iron Lotus" data-reveal data-delay="0">
+            <div class="card__inner">
+              <img src="images/opt/04.webp" alt="SAMURA portrait 04 — Iron Lotus" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">04</span>
+                <span class="card__title">Iron Lotus</span>
+                <span class="card__kanji">蓮</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/05.jpg" data-title="Ghost of Kyoto" data-reveal data-delay="80">
+            <div class="card__inner">
+              <img src="images/opt/05.webp" alt="SAMURA portrait 05 — Ghost of Kyoto" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">05</span>
+                <span class="card__title">Ghost of Kyoto</span>
+                <span class="card__kanji">影</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/06.jpg" data-title="The Last Stand" data-reveal data-delay="160">
+            <div class="card__inner">
+              <img src="images/opt/06.webp" alt="SAMURA portrait 06 — The Last Stand" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">06</span>
+                <span class="card__title">The Last Stand</span>
+                <span class="card__kanji">戦</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/07.jpg" data-title="Moonlit Vigil" data-reveal data-delay="0">
+            <div class="card__inner">
+              <img src="images/opt/07.webp" alt="SAMURA portrait 07 — Moonlit Vigil" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">07</span>
+                <span class="card__title">Moonlit Vigil</span>
+                <span class="card__kanji">月</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/08.jpg" data-title="Ashen Blade" data-reveal data-delay="80">
+            <div class="card__inner">
+              <img src="images/opt/08.webp" alt="SAMURA portrait 08 — Ashen Blade" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">08</span>
+                <span class="card__title">Ashen Blade</span>
+                <span class="card__kanji">刃</span>
+              </figcaption>
+            </div>
+          </figure>
+          <figure class="card" data-src="images/09.jpg" data-title="The Eternal Way" data-reveal data-delay="160">
+            <div class="card__inner">
+              <img src="images/opt/09.webp" alt="SAMURA portrait 09 — The Eternal Way" loading="lazy" decoding="async" />
+              <span class="card__shine" aria-hidden="true"></span>
+              <figcaption>
+                <span class="card__no">09</span>
+                <span class="card__title">The Eternal Way</span>
+                <span class="card__kanji">道</span>
+              </figcaption>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="feature">
+      <div class="feature__bg" style="background-image: url('images/05.jpg')"></div>
+      <div class="feature__veil"></div>
+      <div class="feature__content" data-reveal>
+        <span class="feature__kanji" aria-hidden="true">静</span>
+        <blockquote>
+          “The blade is not the weapon.<br />
+          <em>The stillness is.</em>”
+        </blockquote>
+        <p class="feature__cite">— The Unwritten Scroll</p>
+      </div>
+    </section>
+
+    <footer class="footer" id="contact">
+      <div class="container">
+        <div class="footer__top">
+          <div class="footer__brand">
+            <p class="eyebrow">連絡 <span>·</span> Summon the Warrior</p>
+            <a class="footer__mail" href="mailto:hello@samura.studio" data-cursor="hover">hello@samura.studio</a>
+            <p class="footer__note">For commissions, prints and collaborations.<br />One reply. No hesitation.</p>
+          </div>
+          <nav class="footer__links" aria-label="Footer">
+            <a href="#home" data-cursor="hover">Home</a>
+            <a href="#code" data-cursor="hover">The Code</a>
+            <a href="#gallery" data-cursor="hover">Collection</a>
+            <a href="#contact" data-cursor="hover">Contact</a>
+          </nav>
+          <div class="footer__social">
+            <a href="https://instagram.com/upendra_ai_official" target="_blank" rel="noreferrer" data-cursor="hover">Instagram</a>
+            <a href="#gallery" data-cursor="hover">Prints</a>
+            <a href="#code" data-cursor="hover">Journal</a>
+          </div>
+        </div>
+        <div class="footer__wordmark" aria-hidden="true">SAMURA</div>
+        <div class="footer__bottom">
+          <span>© <span id="year">2026</span> SAMURA. All portraits forged with AI.</span>
+          <span>Portraits — <a href="https://instagram.com/upendra_ai_official" target="_blank" rel="noreferrer" data-cursor="hover">@upendra_ai_official</a></span>
+          <span>侍 · Bushidō</span>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-label="Portrait viewer">
+    <button class="lightbox__close" id="lightboxClose" aria-label="Close viewer" data-cursor="hover">✕</button>
+    <button class="lightbox__arrow lightbox__arrow--prev" id="lightboxPrev" aria-label="Previous portrait" data-cursor="hover">‹</button>
+    <figure class="lightbox__figure">
+      <img id="lightboxImg" src="" alt="" />
+      <figcaption id="lightboxCaption"></figcaption>
+    </figure>
+    <button class="lightbox__arrow lightbox__arrow--next" id="lightboxNext" aria-label="Next portrait" data-cursor="hover">›</button>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
